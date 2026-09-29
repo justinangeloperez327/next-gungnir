@@ -5,7 +5,11 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-gungnir-silver/70 bg-gungnir-white/95 backdrop-blur">
       <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
-        <Link href="/" aria-label="Gungnir home" className="flex items-center">
+        <Link
+          href="/"
+          aria-label="Gungnir home"
+          className="flex items-center rounded-md bg-gungnir-silver px-2 py-1"
+        >
           <Image
             src="/images/logo.png"
             alt="Gungnir"
