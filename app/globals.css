@@ -1,30 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --midnight-navy: #081832;
-  --royal-blue: #0247B1;
-  --precision-blue: #0A7BEF;
-  --cyan-highlight: #34CBFB;
-  --deep-steel: #344C69;
-  --steel-blue: #748EAA;
-  --soft-silver: #CCD8EA;
-  --pearl-white: #F6F8FB;
-  --graphite: #02060D;
+  --gungnir-blue: #0A7BEF;
+  --gungnir-white: #F8FAFC;
+  --gungnir-silver: #C7D0DA;
+  --ink: #0B0D10;
 
-  --background: var(--graphite);
-  --foreground: var(--pearl-white);
+  --background: var(--gungnir-white);
+  --foreground: var(--ink);
 }
 
 @theme inline {
-  --color-midnight-navy: var(--midnight-navy);
-  --color-royal-blue: var(--royal-blue);
-  --color-precision-blue: var(--precision-blue);
-  --color-cyan-highlight: var(--cyan-highlight);
-  --color-deep-steel: var(--deep-steel);
-  --color-steel-blue: var(--steel-blue);
-  --color-soft-silver: var(--soft-silver);
-  --color-pearl-white: var(--pearl-white);
-  --color-graphite: var(--graphite);
+  --color-gungnir-blue: var(--gungnir-blue);
+  --color-gungnir-white: var(--gungnir-white);
+  --color-gungnir-silver: var(--gungnir-silver);
+  --color-ink: var(--ink);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 }
@@ -34,16 +24,23 @@
 }
 
 html {
-  background: var(--background);
   scroll-behavior: smooth;
+  background: var(--gungnir-white);
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--gungnir-white);
+  color: var(--ink);
+  font-family:
+    Inter,
+    Geist,
+    ui-sans-serif,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   text-rendering: optimizeLegibility;
 }
 
@@ -52,42 +49,36 @@ a {
   text-decoration: none;
 }
 
-code {
-  color: var(--pearl-white);
+button,
+input,
+summary {
+  font: inherit;
+}
+
+code,
+pre {
+  font-family:
+    "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    Menlo,
+    monospace;
 }
 
 ::selection {
-  background: var(--precision-blue);
-  color: var(--pearl-white);
+  background: var(--gungnir-blue);
+  color: var(--gungnir-white);
 }
 
-.gungnir-shell {
-  background:
-    radial-gradient(circle at 82% 22%, rgb(52 203 251 / 10%), transparent 24rem),
-    radial-gradient(circle at 68% 36%, rgb(10 123 239 / 10%), transparent 32rem),
-    linear-gradient(135deg, var(--graphite) 0%, #040c18 46%, var(--midnight-navy) 100%);
+:focus-visible {
+  outline: 2px solid var(--gungnir-blue);
+  outline-offset: 3px;
 }
 
-.gungnir-docs-shell {
-  background:
-    radial-gradient(circle at 85% 8%, rgb(10 123 239 / 8%), transparent 28rem),
-    linear-gradient(180deg, #040b15 0%, var(--midnight-navy) 36rem, #061225 100%);
+.surface-soft {
+  background: rgb(199 208 218 / 0.18);
 }
 
-.gungnir-metal-text {
-  background: linear-gradient(
-    180deg,
-    var(--pearl-white) 0%,
-    var(--soft-silver) 52%,
-    var(--steel-blue) 100%
-  );
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.gungnir-blue-glow {
-  box-shadow:
-    0 0 0 1px rgb(52 203 251 / 8%),
-    0 16px 50px rgb(10 123 239 / 16%);
+.surface-softer {
+  background: rgb(199 208 218 / 0.10);
 }
