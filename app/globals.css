@@ -1,12 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --midnight-navy: #071B33;
-  --royal-blue: #145DA0;
-  --precision-blue: #2389DA;
-  --soft-silver: #BCC5CE;
-  --pearl-white: #F8FAFC;
-  --graphite: #050D18;
+  --midnight-navy: #081832;
+  --royal-blue: #0247B1;
+  --precision-blue: #0A7BEF;
+  --cyan-highlight: #34CBFB;
+  --deep-steel: #344C69;
+  --steel-blue: #748EAA;
+  --soft-silver: #CCD8EA;
+  --pearl-white: #F6F8FB;
+  --graphite: #02060D;
 
   --background: var(--graphite);
   --foreground: var(--pearl-white);
@@ -16,6 +19,9 @@
   --color-midnight-navy: var(--midnight-navy);
   --color-royal-blue: var(--royal-blue);
   --color-precision-blue: var(--precision-blue);
+  --color-cyan-highlight: var(--cyan-highlight);
+  --color-deep-steel: var(--deep-steel);
+  --color-steel-blue: var(--steel-blue);
   --color-soft-silver: var(--soft-silver);
   --color-pearl-white: var(--pearl-white);
   --color-graphite: var(--graphite);
@@ -29,10 +35,12 @@
 
 html {
   background: var(--background);
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
+  min-height: 100vh;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
@@ -44,7 +52,42 @@ a {
   text-decoration: none;
 }
 
+code {
+  color: var(--pearl-white);
+}
+
 ::selection {
   background: var(--precision-blue);
   color: var(--pearl-white);
+}
+
+.gungnir-shell {
+  background:
+    radial-gradient(circle at 82% 22%, rgb(52 203 251 / 10%), transparent 24rem),
+    radial-gradient(circle at 68% 36%, rgb(10 123 239 / 10%), transparent 32rem),
+    linear-gradient(135deg, var(--graphite) 0%, #040c18 46%, var(--midnight-navy) 100%);
+}
+
+.gungnir-docs-shell {
+  background:
+    radial-gradient(circle at 85% 8%, rgb(10 123 239 / 8%), transparent 28rem),
+    linear-gradient(180deg, #040b15 0%, var(--midnight-navy) 36rem, #061225 100%);
+}
+
+.gungnir-metal-text {
+  background: linear-gradient(
+    180deg,
+    var(--pearl-white) 0%,
+    var(--soft-silver) 52%,
+    var(--steel-blue) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.gungnir-blue-glow {
+  box-shadow:
+    0 0 0 1px rgb(52 203 251 / 8%),
+    0 16px 50px rgb(10 123 239 / 16%);
 }
