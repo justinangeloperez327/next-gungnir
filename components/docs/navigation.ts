@@ -1,4 +1,4 @@
-export type DocsNavItem = readonly [label: string, id: string];
+export type DocsNavItem = readonly [label: string, slug: string];
 
 export type DocsNavGroup = {
   title: string;
@@ -69,3 +69,15 @@ export const docsNavigation: readonly DocsNavGroup[] = [
     ],
   },
 ] as const;
+
+export const docsItems = docsNavigation.flatMap((group) =>
+  group.items.map(([label, slug]) => ({
+    label,
+    slug,
+    group: group.title,
+  })),
+);
+
+export function docsHref(slug: string) {
+  return slug === "introduction" ? "/docs" : `/docs/${slug}`;
+}

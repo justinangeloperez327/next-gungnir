@@ -1,11 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
-import { docsNavigation } from "./navigation";
-
-const allItems = docsNavigation.flatMap((group) =>
-  group.items.map(([label, id]) => ({ label, id, group: group.title })),
-);
+import { docsHref, docsItems } from "./navigation";
 
 export function DocsSearch() {
   const [query, setQuery] = useState("");
@@ -17,7 +14,7 @@ export function DocsSearch() {
       return [];
     }
 
-    return allItems
+    return docsItems
       .filter(
         (item) =>
           item.label.toLowerCase().includes(normalized) ||
@@ -42,24 +39,28 @@ export function DocsSearch() {
       />
 
       {query.trim() && (
-        <div className="absolute left-0 right-0 top-12 z-50 overflow-hidden rounded-md border border-line bg-surface-elevated shadow-[0_12px_30px_rgba(11,13,16,0.12)]">
+        <div className="absolute left-0 right-0 top-12 z-50 overflow-hidden rounded-md border border-line bg-surface-elevated shadow-[0_12px_30px_rgba(11,13,16,0.18)]">
           {matches.length > 0 ? (
             <ul aria-label="Documentation search results" className="py-1">
               {matches.map((item) => (
-                <li key={item.id}>
-                  <a
-                    href={"#" + item.id}
+                <li key={item.slug}>
+                  <Link
+                    href={docsHref(item.slug)}
                     onClick={() => setQuery("")}
                     className="block px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-surface-muted hover:text-gungnir-blue"
                   >
                     <span className="font-medium">{item.label}</span>
-                    <span className="ml-2 text-xs text-foreground/50">{item.group}</span>
-                  </a>
+                    <span className="ml-2 text-xs text-foreground/50">
+                      {item.group}
+                    </span>
+                  </Link>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="px-3 py-3 text-sm text-foreground/55">No matching section.</p>
+            <p className="px-3 py-3 text-sm text-foreground/55">
+              No matching page.
+            </p>
           )}
         </div>
       )}

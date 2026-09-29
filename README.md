@@ -70,7 +70,8 @@ Open `http://localhost:3000`.
 ## Routes
 
 - `/` — framework landing page
-- `/docs` — framework documentation
+- `/docs` — documentation introduction
+- `/docs/<topic>` — individual documentation pages such as `/docs/routing`, `/docs/controllers`, `/docs/models`, and `/docs/migrations`
 
 ## Quality Checks
 
