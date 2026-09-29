@@ -4,19 +4,8 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 
 const heroCode = [
-  "model User",
-  "{",
-  "    string name;",
-  "    string email;",
+  "Route::get(\"/users\", UserController::index);",
   "",
-  "    posts()",
-  "    {",
-  "        return hasMany<Post>();",
-  "    }",
-  "}",
-].join("\n");
-
-const languageCode = [
   "controller UserController",
   "{",
   "    Response index()",
@@ -30,17 +19,17 @@ const languageCode = [
   "}",
 ].join("\n");
 
-const ormCode = [
-  "const users = User::where(\"active\", true)",
-  "    .with(\"posts\")",
-  "    .orderBy(\"name\")",
-  "    .get();",
-].join("\n");
-
-const routesCode = [
-  "Route::get(\"/users\", UserController::index);",
-  "Route::get(\"/users/{id}\", UserController::show);",
-  "Route::post(\"/users\", UserController::store);",
+const modelCode = [
+  "model User",
+  "{",
+  "    string name;",
+  "    string email;",
+  "",
+  "    posts()",
+  "    {",
+  "        return hasMany<Post>();",
+  "    }",
+  "}",
 ].join("\n");
 
 const asyncCode = [
@@ -53,30 +42,22 @@ const asyncCode = [
 ].join("\n");
 
 const features = [
-  ["Routing", "Map HTTP methods and paths to application handlers."],
-  ["Controllers", "Keep request orchestration in focused application classes."],
-  ["Models & ORM", "Query and persist application data through model APIs."],
-  ["Relationships", "Define related data with conventional model relationships."],
-  ["Migrations", "Version database structure through explicit migration plans."],
-  ["Validation", "Validate request input with reusable rule declarations."],
-  ["Middleware", "Compose request and response behavior around route handlers."],
-  ["Views", "Render server-side HTML with escaped template expressions."],
-  ["Authentication", "Build identity flows on the framework authentication foundation."],
-  ["Authorization", "Express access decisions through application authorization APIs."],
-  ["Queues", "Move background work into queued jobs."],
-  ["Events", "Decouple application behavior with events and listeners."],
-  ["Mail", "Send application mail through framework transport contracts."],
-  ["Notifications", "Model user-facing notifications independently from delivery."],
-  ["Scheduling", "Define recurring application work through the scheduler."],
-  ["Storage", "Work with application files through storage abstractions."],
-] as const;
-
-const pipeline = [
-  ".gnr source",
-  "Lexer",
-  "Parser / AST",
-  "Generated C++23",
-  "Native binary",
+  ["Routing", "Define application routes with clear HTTP method and path conventions."],
+  ["Controllers", "Organize request handling into focused application controllers."],
+  ["Models & ORM", "Query and persist application data through expressive models."],
+  ["Relationships", "Work with related records through model relationships and eager loading."],
+  ["Migrations", "Version database changes through repeatable migration files."],
+  ["Validation", "Validate incoming data with concise, reusable rules."],
+  ["Middleware", "Apply authentication, sessions, security, and request behavior around routes."],
+  ["Views", "Render server-side HTML with simple template expressions."],
+  ["Authentication", "Build sign-in and user identity flows on framework authentication services."],
+  ["Authorization", "Keep permissions and access decisions separate from controllers."],
+  ["Queues", "Move background work out of the request cycle."],
+  ["Events", "Connect application behavior through events and listeners."],
+  ["Mail", "Send application email through configured mail transports."],
+  ["Notifications", "Deliver application notifications through reusable notification classes."],
+  ["Scheduling", "Run recurring application tasks on a defined schedule."],
+  ["Storage", "Store and retrieve application files through a consistent storage API."],
 ] as const;
 
 export default function Home() {
@@ -91,12 +72,13 @@ export default function Home() {
               Gungnir Framework
             </p>
             <h1 className="mt-5 max-w-4xl text-5xl font-semibold tracking-[-0.045em] text-ink sm:text-6xl lg:text-7xl">
-              Modern C++ for expressive web development.
+              An expressive web framework built in C++.
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-ink/68 sm:text-xl">
-              Gungnir is a C++23 web framework and source-language toolchain for
-              building structured, high-performance web applications with clear
-              application conventions and native C++ interoperability.
+              Gungnir gives C++ developers a structured way to build web
+              applications with routing, controllers, models, validation,
+              middleware, views, authentication, background jobs, and other
+              common application services.
             </p>
 
             <div className="mt-9 flex flex-wrap gap-3">
@@ -116,7 +98,7 @@ export default function Home() {
           </div>
 
           <div className="lg:pl-4">
-            <CodeBlock code={heroCode} label="user.gnr" />
+            <CodeBlock code={heroCode} label="A Gungnir application" />
           </div>
         </div>
       </section>
@@ -128,11 +110,12 @@ export default function Home() {
               Framework
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
-              Everything needed to build an application.
+              Everything needed for a modern web application.
             </h2>
             <p className="mt-4 text-base leading-7 text-ink/65">
-              Gungnir keeps common server-side capabilities under one coherent
-              application model while preserving explicit C++ runtime behavior.
+              Use familiar framework conventions to keep application code
+              organized from the first route through database access,
+              background work, and production services.
             </p>
           </div>
 
@@ -155,90 +138,21 @@ export default function Home() {
       </section>
 
       <section className="border-b border-gungnir-silver">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-12 lg:py-24">
-          <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gungnir-blue">
-                Gungnir Language
-              </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
-                Application code without framework plumbing.
-              </h2>
-              <p className="mt-5 text-base leading-7 text-ink/65">
-                Gungnir source files use the <code>.gnr</code> extension. The
-                frontend parses framework-aware syntax and lowers it into ordinary,
-                inspectable C++23 before native compilation.
-              </p>
-            </div>
-            <CodeBlock code={languageCode} label="user_controller.gnr" />
-          </div>
-
-          <ol className="mt-12 grid gap-3 sm:grid-cols-5">
-            {pipeline.map((step, index) => (
-              <li
-                key={step}
-                className="relative rounded-md border border-gungnir-silver px-4 py-4 text-sm font-medium text-ink"
-              >
-                <span className="mb-2 block text-xs font-semibold text-gungnir-blue">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                {step}
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <section className="border-b border-gungnir-silver">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:items-center lg:px-12 lg:py-24">
-          <CodeBlock code={ormCode} label="ORM query" />
+        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:px-12 lg:py-24">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gungnir-blue">
-              Models & ORM
+              Convention First
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
-              Keep data access expressive and explicit.
+              Write application code around the problem you are solving.
             </h2>
             <p className="mt-5 text-base leading-7 text-ink/65">
-              Models provide query entry points, persistence, hydration, eager
-              loading, relationship metadata, timestamps, and soft-delete support.
-              Query values stay parameterized at the database boundary.
-            </p>
-            <ul className="mt-7 grid gap-3 text-sm text-ink/70 sm:grid-cols-2">
-              {[
-                "Expressive models",
-                "Relationships",
-                "Eager loading",
-                "Migrations",
-                "Parameterized queries",
-                "Multiple database backends",
-              ].map((item) => (
-                <li key={item} className="flex items-center gap-3">
-                  <span className="h-1.5 w-1.5 rounded-full bg-gungnir-blue" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-gungnir-silver">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:items-center lg:px-12 lg:py-24">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gungnir-blue">
-              Routing & Controllers
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
-              Route requests directly into application code.
-            </h2>
-            <p className="mt-5 text-base leading-7 text-ink/65">
-              Routes connect HTTP methods and paths to controller actions. Route
-              groups, middleware, named routes, constraints, and fallback handlers
-              remain part of the same routing layer.
+              Models, controllers, middleware, migrations, requests, jobs, and
+              other application classes follow predictable conventions so the
+              project stays easy to navigate as it grows.
             </p>
           </div>
-          <CodeBlock code={routesCode} label="routes.gnr" />
+          <CodeBlock code={modelCode} label="user.gnr" />
         </div>
       </section>
 
@@ -246,19 +160,17 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:px-12 lg:py-24">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gungnir-blue">
-              Async Runtime
+              Async Actions
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
-              Async syntax backed by native C++ coroutines.
+              Use async and await where your application needs them.
             </h2>
             <p className="mt-5 text-base leading-7 text-ink/65">
-              Language-level <code>async</code> and <code>await</code> lower into
-              Gungnir task types and C++ coroutine mechanics. Suspension remains
-              explicit, and synchronous operations stay synchronous until their
-              runtime implementation is genuinely asynchronous.
+              Controller actions can be asynchronous, keeping network-bound and
+              other asynchronous work straightforward in application code.
             </p>
           </div>
-          <CodeBlock code={asyncCode} label="Async controller" />
+          <CodeBlock code={asyncCode} label="Async controller action" />
         </div>
       </section>
 
@@ -272,9 +184,9 @@ export default function Home() {
               Start building with Gungnir.
             </h2>
             <p className="mt-5 text-base leading-7 text-ink/65">
-              Learn the framework from installation through routing, models,
-              migrations, async programming, application services, and production
-              runtime behavior.
+              Learn how to install Gungnir, structure an application, define
+              routes and controllers, work with models and migrations, validate
+              requests, render views, and configure application services.
             </p>
             <Link
               href="/docs"

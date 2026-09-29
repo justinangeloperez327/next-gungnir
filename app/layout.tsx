@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     template: "%s | Gungnir",
   },
   description:
-    "Gungnir is a C++23 web framework and source-language toolchain for building structured web applications with expressive application code and native C++ interoperability.",
+    "Gungnir is an expressive web framework built in C++ for routing, controllers, models, validation, views, middleware, authentication, background jobs, and application services.",
 };
 
 export default function RootLayout({

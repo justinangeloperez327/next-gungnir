@@ -11,7 +11,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 export const metadata: Metadata = {
   title: "Documentation",
   description:
-    "Gungnir framework documentation covering installation, language syntax, routing, controllers, ORM, migrations, application services, runtime behavior, and tooling.",
+    "Learn how to build web applications with Gungnir, including routing, controllers, models, validation, views, database access, authentication, queues, and deployment.",
 };
 
 const installCode = [
@@ -19,42 +19,13 @@ const installCode = [
   "cmake --build build",
 ].join("\n");
 
-const newProjectCode = [
+const createProjectCode = [
   "gungnir new my-app",
   "cd my-app",
   "gungnir dev",
 ].join("\n");
 
-const firstAppCode = [
-  "controller HomeController",
-  "{",
-  "    Response index()",
-  "    {",
-  "        return response(\"Hello from Gungnir\");",
-  "    }",
-  "}",
-  "",
-  "Application app;",
-  "Route::get(\"/\", HomeController::index);",
-  "app.listen(8000);",
-].join("\n");
-
-const modelCode = [
-  "model User",
-  "{",
-  "    string name;",
-  "    string email;",
-  "    string? nickname;",
-  "    bool active = true;",
-  "",
-  "    posts()",
-  "    {",
-  "        return hasMany<Post>();",
-  "    }",
-  "}",
-].join("\n");
-
-const routingCode = [
+const routeCode = [
   "Route::get(\"/users\", UserController::index);",
   "Route::get(\"/users/{id}\", UserController::show);",
   "Route::post(\"/users\", UserController::store);",
@@ -65,8 +36,6 @@ const routingCode = [
 const controllerCode = [
   "controller UserController",
   "{",
-  "    inject Logger logger;",
-  "",
   "    Response index()",
   "    {",
   "        const users = User::all();",
@@ -82,20 +51,26 @@ const requestCode = [
   "Response store(Request request)",
   "{",
   "    const name = request.input(\"name\");",
-  "    const values = request.only([\"name\", \"email\"]);",
+  "    const email = request.input(\"email\");",
   "",
-  "    return json(values);",
+  "    return response(\"User received\");",
   "}",
+].join("\n");
+
+const responseCode = [
+  "return response(\"Saved\", 201);",
+  "return json(user);",
+  "return view(\"users/show\", { \"user\": user });",
+  "return redirect(\"/users\");",
 ].join("\n");
 
 const middlewareCode = [
   "app.middleware_alias<AuthMiddleware>(\"auth\");",
   "app.middleware_group(\"web\", {\"session\", \"csrf\", \"auth\"});",
-  "app.middleware_priority({\"session\", \"csrf\", \"auth\"});",
 ].join("\n");
 
 const validationCode = [
-  "data = request.validate({",
+  "const data = request.validate({",
   "    \"name\": \"required|min:2|max:100\",",
   "    \"email\": \"required|email\"",
   "});",
@@ -111,13 +86,43 @@ const viewCode = [
   "</ul>",
 ].join("\n");
 
-const ormCode = [
+const modelCode = [
+  "model User",
+  "{",
+  "    string name;",
+  "    string email;",
+  "    bool active = true;",
+  "",
+  "    posts()",
+  "    {",
+  "        return hasMany<Post>();",
+  "    }",
+  "}",
+].join("\n");
+
+const queryCode = [
   "const users = User::where(\"active\", true)",
   "    .orderBy(\"name\")",
-  "    .withTrashed()",
   "    .get();",
   "",
   "const user = User::findOrFail(id);",
+].join("\n");
+
+const relationshipsCode = [
+  "posts()",
+  "{",
+  "    return hasMany<Post>();",
+  "}",
+  "",
+  "profile()",
+  "{",
+  "    return hasOne<Profile>();",
+  "}",
+  "",
+  "roles()",
+  "{",
+  "    return belongsToMany<Role>();",
+  "}",
 ].join("\n");
 
 const migrationCode = [
@@ -135,24 +140,15 @@ const migrationCode = [
 ].join("\n");
 
 const asyncCode = [
-  "controller UserController",
+  "async Response index()",
   "{",
-  "    async Response index()",
-  "    {",
-  "        const result = await fetchResponse();",
-  "        return result;",
-  "    }",
+  "    const result = await fetchResponse();",
+  "",
+  "    return result;",
   "}",
 ].join("\n");
 
 const cliCode = [
-  "gungnir new my-app",
-  "gungnir build",
-  "gungnir run",
-  "gungnir dev",
-].join("\n");
-
-const generatorCode = [
   "gungnir make:model User",
   "gungnir make:controller UserController",
   "gungnir make:middleware AuthMiddleware",
@@ -182,7 +178,15 @@ function DocSection({
   );
 }
 
-function MiniTopic({
+function TopicGrid({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  return <div className="grid gap-4 sm:grid-cols-2">{children}</div>;
+}
+
+function Topic({
   id,
   title,
   children,
@@ -216,367 +220,325 @@ export default function Documentation() {
                 Gungnir Documentation
               </p>
               <h1 className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-ink sm:text-5xl">
-                Build structured web applications in modern C++.
+                Build web applications with clear conventions.
               </h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-ink/65">
-                Gungnir combines a C++23 runtime with an expressive{" "}
-                <code>.gnr</code> application language. The framework provides
-                common server-side application layers while compiling to ordinary,
-                inspectable C++.
+                This documentation focuses on the conventions and APIs you use to
+                build a Gungnir application: routes, controllers, models,
+                validation, views, database access, security, background work, and
+                deployment.
               </p>
-              <div className="surface-soft mt-7 rounded-lg border border-gungnir-silver p-5 text-sm leading-6 text-ink/65">
-                Gungnir is under active development. Version 0.1.0 is not yet
-                API-stable, so applications should pin the exact version or commit
-                they validate against.
-              </div>
             </header>
 
             <DocSection id="introduction" title="Introduction">
               <p>
-                Gungnir is a web application framework, runtime, and source-language
-                toolchain built around C++23. It includes routing, request and
-                response primitives, controllers, dependency injection, validation,
-                ORM, migrations, views, sessions, cache, application services,
-                tooling, and production runtime contracts.
+                Gungnir is an expressive web framework built in C++. It provides
+                the common building blocks used by server-side applications while
+                keeping application code organized around familiar framework
+                concepts.
               </p>
               <p>
-                The language frontend remains separate from the runtime hot path.
-                Framework-aware source is parsed and lowered to C++, leaving the
-                generated application code inspectable and interoperable with native
-                C++.
+                A typical Gungnir application is composed of routes, controllers,
+                models, middleware, migrations, requests, views, jobs, events,
+                mail, notifications, and other application services.
               </p>
             </DocSection>
 
             <DocSection id="requirements" title="Requirements">
+              <p>Before creating a Gungnir application, install:</p>
               <ul className="list-disc space-y-2 pl-6">
                 <li>A C++23-capable compiler</li>
                 <li>CMake 3.25 or newer</li>
-                <li>Gungnir CLI/compiler tools when using .gnr source</li>
-                <li>Required database client libraries for optional production adapters</li>
+                <li>The Gungnir framework and command-line tools</li>
+                <li>The client library for any database backend you plan to use</li>
               </ul>
-              <p>Gungnir targets modern Clang, GCC, and MSVC toolchains.</p>
             </DocSection>
 
             <DocSection id="installation" title="Installation">
-              <p>Build the framework and command-line tools with CMake.</p>
+              <p>Build Gungnir and its command-line tools with CMake:</p>
               <CodeBlock code={installCode} label="Build Gungnir" terminal />
-              <p>Create a project and start the development workflow with the CLI.</p>
-              <CodeBlock code={newProjectCode} label="Create a project" terminal />
+              <p>Create a new application and start the development server:</p>
+              <CodeBlock code={createProjectCode} label="Create an application" terminal />
             </DocSection>
 
             <DocSection id="configuration" title="Configuration">
               <p>
-                Application configuration belongs at startup and environment
-                boundaries rather than inside request handlers. Database connections,
-                runtime limits, view roots, middleware registration, and service
-                providers should be configured before the application begins serving
-                traffic.
+                Configure application behavior at startup using environment and
+                application configuration. Typical settings include the
+                application port, database connection, view directory, session
+                settings, cache backend, mail transport, storage, and runtime
+                limits.
+              </p>
+              <p>
+                Keep environment-specific values outside your application classes
+                so the same code can run in development, testing, and production.
               </p>
             </DocSection>
 
             <DocSection id="project-structure" title="Project Structure">
               <p>
-                The CLI is project-aware and discovers a Gungnir project by walking
-                upward until it finds the project marker. Generated source should
-                remain organized by application responsibility: controllers, models,
-                middleware, migrations, requests, jobs, views, and configuration.
+                Organize application code by responsibility. The CLI generators
+                create source files for the common framework concepts and avoid
+                overwriting existing files.
               </p>
-            </DocSection>
-
-            <DocSection id="first-application" title="Your First Application">
+              <CodeBlock code={cliCode} label="Common generators" terminal />
               <p>
-                Define application classes and routes, then let the application own
-                the HTTP listener and dispatch lifecycle.
-              </p>
-              <CodeBlock code={firstAppCode} label="app.gnr" />
-            </DocSection>
-
-            <DocSection id="language" title="Gungnir Language">
-              <p>
-                Gungnir source uses the <code>.gnr</code> extension. The frontend
-                pipeline is lexer → parser/AST → lowering → generated C++23 → native
-                compiler.
-              </p>
-              <CodeBlock code={modelCode} label="user.gnr" />
-              <p>
-                First-class framework declarations such as <code>model</code>,{" "}
-                <code>controller</code>, <code>migration</code>, and{" "}
-                <code>middleware</code> hide inheritance and framework namespace
-                plumbing from normal application code.
+                Keep controllers focused on request handling, models focused on
+                data, middleware focused on request/response concerns, and jobs or
+                listeners focused on background application behavior.
               </p>
             </DocSection>
 
             <DocSection id="routing" title="Routing">
               <p>
-                Routes map HTTP methods and paths to synchronous or asynchronous
-                handlers and controller actions.
+                Define routes by pairing an HTTP method and path with a controller
+                action or route handler.
               </p>
-              <CodeBlock code={routingCode} label="routes.gnr" />
+              <CodeBlock code={routeCode} label="Routes" />
               <p>
-                The router supports GET, POST, PUT, PATCH, DELETE, OPTIONS, and HEAD,
-                plus global and route middleware, path groups, named routes,
-                parameter constraints, reverse URL generation, and fallbacks.
+                Route groups can share prefixes and middleware. Named routes and
+                parameter constraints can be used where an application needs
+                reusable URLs or stricter parameter matching.
               </p>
             </DocSection>
 
             <DocSection id="controllers" title="Controllers">
               <p>
-                Controllers are application-facing request handlers resolved through
-                the Gungnir container. They should coordinate HTTP behavior rather
-                than absorb database or transport plumbing.
+                Controllers group related request actions. Use them to coordinate
+                request input, models, validation, application services, and the
+                response returned to the client.
               </p>
-              <CodeBlock code={controllerCode} label="user_controller.gnr" />
+              <CodeBlock code={controllerCode} label="UserController" />
+              <p>
+                Keep business or infrastructure-heavy logic out of controllers
+                when it belongs in a dedicated service, model, job, listener, or
+                other application class.
+              </p>
             </DocSection>
 
-            <DocSection id="request-response" title="Request & Response">
+            <DocSection id="requests" title="Requests">
               <p>
-                Request input keeps query values, form bodies, JSON, cookies,
-                headers, and route parameters distinct internally while exposing a
-                compact controller API.
+                Controller actions can accept a request and read input, query
+                values, route parameters, headers, cookies, and JSON data through
+                the request API.
               </p>
               <CodeBlock code={requestCode} label="Request input" />
               <p>
-                Responses can represent text, JSON, views, HTML, downloads,
-                redirects, and no-content results.
+                Use helpers such as <code>input</code>, <code>has</code>,{" "}
+                <code>only</code>, and <code>except</code> when you only need
+                selected scalar input.
               </p>
+            </DocSection>
+
+            <DocSection id="responses" title="Responses">
+              <p>
+                Return the response type that matches the route: text, JSON, a
+                rendered view, redirect, download, HTML, or no-content response.
+              </p>
+              <CodeBlock code={responseCode} label="Responses" />
             </DocSection>
 
             <DocSection id="middleware" title="Middleware">
               <p>
-                Middleware forms an asynchronous pipeline around route handlers.
-                Middleware can execute before the next handler, short-circuit with a
-                response, and perform response-side work after the continuation.
+                Middleware runs around a route and is useful for concerns shared
+                across many requests, such as authentication, sessions, CSRF,
+                rate limits, headers, or request policies.
               </p>
-              <CodeBlock code={middlewareCode} label="Application middleware" />
+              <CodeBlock code={middlewareCode} label="Middleware registration" />
+              <p>
+                Register middleware under aliases and compose aliases into groups
+                when several routes share the same request pipeline.
+              </p>
             </DocSection>
 
             <DocSection id="validation" title="Validation">
               <p>
-                Validation separates rule declarations, validation results, and HTTP
-                exception behavior. Reusable validated request types keep repeated
-                rules outside controller actions.
+                Validate request data before using it in the rest of the
+                application.
               </p>
-              <CodeBlock code={validationCode} label="Request validation" />
+              <CodeBlock code={validationCode} label="Validate request data" />
+              <p>
+                Common rules include required, nullable, string, integer, numeric,
+                boolean, email, accepted, min, max, in, same, and confirmed.
+                Reusable request-validation classes are appropriate when multiple
+                actions share a larger rule set.
+              </p>
             </DocSection>
 
             <DocSection id="views" title="Views">
               <p>
-                The view engine renders server-side HTML with escaped interpolation
-                by default. Models and collections can be converted through the
-                framework model attribute contract.
+                Render HTML by returning a view and passing the data needed by the
+                template.
               </p>
-              <CodeBlock code={viewCode} label="users/index.html" />
+              <CodeBlock code={viewCode} label="View template" />
+              <p>
+                Standard interpolation is escaped by default. Use raw output only
+                for trusted HTML.
+              </p>
             </DocSection>
 
-            <DocSection id="dependency-injection" title="Dependency Injection">
+            <DocSection id="database-configuration" title="Database Configuration">
               <p>
-                The application container owns construction and lifetime rules for
-                framework services and application dependencies. Gungnir source can
-                declare controller dependencies with <code>inject</code>, while the
-                frontend generates the native constructor wiring.
+                Configure the database connection used by your application before
+                querying models or running migrations. Gungnir supports relational
+                database adapters and MongoDB through their respective database
+                integrations.
+              </p>
+              <p>
+                Applications that use multiple connections can select the
+                appropriate connection at the model or database-operation level.
               </p>
             </DocSection>
 
             <DocSection id="models" title="Models">
               <p>
-                Gungnir models expose ORM behavior without requiring application code
-                to write CRTP, field-wrapper, primary-key, or attribute-metadata
-                plumbing. Conventional table names, primary keys, fillable fields,
-                and timestamps can be generated from model declarations.
+                Models represent application records and provide the normal entry
+                point for querying and persistence.
+              </p>
+              <CodeBlock code={modelCode} label="User model" />
+              <p>
+                By convention, models use an integer <code>id</code> primary key,
+                infer a table name, and maintain <code>created_at</code> and{" "}
+                <code>updated_at</code> timestamps unless configured otherwise.
               </p>
             </DocSection>
 
-            <DocSection id="orm" title="ORM">
+            <DocSection id="querying" title="Querying">
               <p>
-                The ORM provides model query entry points, persistence, hydration,
-                dirty tracking, pagination, eager loading, soft-delete behavior, and
-                query observation.
+                Start queries from the model and compose conditions before
+                retrieving records.
               </p>
-              <CodeBlock code={ormCode} label="Model query" />
+              <CodeBlock code={queryCode} label="Model queries" />
+              <p>
+                Use model query methods for filtering, ordering, pagination,
+                eager loading, soft-delete behavior, and common record lookups.
+              </p>
             </DocSection>
 
             <DocSection id="relationships" title="Relationships">
               <p>
-                Relationship APIs cover one-to-one, one-to-many, inverse, many-to-many,
-                and through relationships. Conventional foreign keys and pivot names
-                can be inferred, while explicit arguments override those conventions.
-                Eager loading batches keys instead of issuing one relation query for
-                every parent model.
+                Define relationships on models and use eager loading when related
+                records are needed for a collection of parent models.
               </p>
-            </DocSection>
-
-            <DocSection id="query-builder" title="Query Builder">
+              <CodeBlock code={relationshipsCode} label="Model relationships" />
               <p>
-                Query plans compile values into database bindings. Values are not
-                interpolated directly into SQL. Backend-specific quoting,
-                placeholders, and capability boundaries are handled by the database
-                layer.
+                Conventional keys are inferred where possible. Provide explicit
+                keys when working with an existing database that does not follow
+                the default conventions.
               </p>
             </DocSection>
 
             <DocSection id="migrations" title="Migrations">
               <p>
-                Migrations describe table and column operations and are compiled for
-                the active backend. The runner supports applying pending migrations,
-                rolling back the latest batch, resetting applied batches, and
-                reporting migration status.
+                Use migrations to keep database structure changes versioned with
+                the application.
               </p>
-              <CodeBlock code={migrationCode} label="C++ migration API" />
+              <CodeBlock code={migrationCode} label="Create users table" />
+              <p>
+                Migration commands support applying pending migrations, rolling
+                back the latest batch, resetting migrations, and checking status.
+              </p>
             </DocSection>
 
-            <DocSection id="database-backends" title="Database Backends">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <MiniTopic id="postgresql" title="PostgreSQL">
-                  Optional libpq-backed adapter support is documented in the main
-                  framework repository. Availability depends on the client library
-                  enabled at build time.
-                </MiniTopic>
-                <MiniTopic id="mysql" title="MySQL">
-                  The MySQL adapter boundary uses the native client library and keeps
-                  query compilation separate from execution.
-                </MiniTopic>
-                <MiniTopic id="sql-server" title="SQL Server">
-                  SQL Server support is represented through the ODBC adapter boundary
-                  with backend-specific SQL behavior kept explicit.
-                </MiniTopic>
-                <MiniTopic id="mongodb" title="MongoDB">
-                  MongoDB uses document-query semantics and does not manufacture
-                  relational concepts such as joins or row locks.
-                </MiniTopic>
-              </div>
+            <DocSection id="security" title="Security">
+              <TopicGrid>
+                <Topic id="authentication" title="Authentication">
+                  Use the authentication services when a route needs an identified
+                  application user. Authentication middleware can protect groups of
+                  routes that require a signed-in user.
+                </Topic>
+                <Topic id="authorization" title="Authorization">
+                  Keep access decisions in authorization policies or application
+                  authorization logic instead of scattering permission checks
+                  throughout controllers.
+                </Topic>
+                <Topic id="sessions" title="Sessions">
+                  Use sessions for request-to-request state such as authenticated
+                  user state, flash data, and other short-lived application values.
+                </Topic>
+                <Topic id="security-middleware" title="Security Middleware">
+                  Apply CSRF, CORS, rate limiting, host validation, proxy rules, and
+                  request limits through the appropriate middleware and runtime
+                  configuration.
+                </Topic>
+              </TopicGrid>
             </DocSection>
 
             <DocSection id="application-services" title="Application Services">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <MiniTopic id="authentication" title="Authentication">
-                  Authentication foundations provide the contracts needed to identify
-                  application users without coupling controllers directly to transport
-                  mechanics.
-                </MiniTopic>
-                <MiniTopic id="authorization" title="Authorization">
-                  Authorization APIs separate access decisions from request-routing
-                  code.
-                </MiniTopic>
-                <MiniTopic id="sessions" title="Sessions">
-                  Session contracts manage application state across requests while
-                  keeping backend choice explicit.
-                </MiniTopic>
-                <MiniTopic id="cache" title="Cache">
-                  Cache abstractions provide application-level caching without
-                  requiring callers to depend on one concrete backend.
-                </MiniTopic>
-                <MiniTopic id="events" title="Events">
-                  Events and listeners decouple application actions from downstream
-                  reactions.
-                </MiniTopic>
-                <MiniTopic id="queues" title="Queues">
-                  Queue and job foundations move suitable work out of the request
-                  path.
-                </MiniTopic>
-                <MiniTopic id="mail" title="Mail">
-                  Mail APIs separate message construction from transport.
-                </MiniTopic>
-                <MiniTopic id="notifications" title="Notifications">
-                  Notifications model user-facing communication independently from
-                  individual delivery channels.
-                </MiniTopic>
-                <MiniTopic id="storage" title="Storage">
-                  Storage contracts provide a consistent application boundary for
-                  filesystem operations.
-                </MiniTopic>
-                <MiniTopic id="scheduler" title="Scheduler">
-                  The scheduler provides contracts for recurring application work.
-                </MiniTopic>
-              </div>
+              <TopicGrid>
+                <Topic id="cache" title="Cache">
+                  Cache data that is expensive to reproduce and can safely be reused
+                  between requests.
+                </Topic>
+                <Topic id="events" title="Events">
+                  Dispatch events when application behavior should notify one or
+                  more listeners without tightly coupling those actions together.
+                </Topic>
+                <Topic id="queues" title="Queues">
+                  Use queued jobs for work that does not need to finish before the
+                  HTTP response is returned.
+                </Topic>
+                <Topic id="mail" title="Mail">
+                  Build mail messages separately from the transport used to send
+                  them.
+                </Topic>
+                <Topic id="notifications" title="Notifications">
+                  Represent application notifications as reusable classes and route
+                  them through the configured delivery channels.
+                </Topic>
+                <Topic id="storage" title="Storage">
+                  Use the storage API instead of hard-coding filesystem behavior
+                  directly into controllers.
+                </Topic>
+                <Topic id="scheduler" title="Scheduler">
+                  Register recurring application tasks in the scheduler rather than
+                  duplicating scheduling logic across scripts.
+                </Topic>
+              </TopicGrid>
             </DocSection>
 
-            <DocSection id="async-runtime" title="Async Runtime">
+            <DocSection id="async-actions" title="Async Actions">
               <p>
-                Gungnir exposes language-level <code>async</code> and{" "}
-                <code>await</code> while lowering them into native C++ coroutine
-                types and suspension mechanics.
+                Use <code>async</code> controller actions when an operation is
+                asynchronous and <code>await</code> the asynchronous work inside
+                that action.
               </p>
-              <CodeBlock code={asyncCode} label="Async controller" />
-              <p>
-                Async is semantic rather than cosmetic: synchronous database and ORM
-                operations remain synchronous until their implementations provide
-                genuine asynchronous behavior.
-              </p>
+              <CodeBlock code={asyncCode} label="Async controller action" />
             </DocSection>
 
-            <DocSection id="http-runtime" title="HTTP Runtime">
+            <DocSection id="logging" title="Logging">
               <p>
-                The HTTP/1.1 runtime uses a non-blocking readiness reactor. Runtime
-                options cover request and header limits, connection limits,
-                persistent-connection request counts, read/write/idle timeouts,
-                request timeout, keep-alive behavior, cancellation, and graceful
-                shutdown.
-              </p>
-            </DocSection>
-
-            <DocSection id="logging" title="Logging & Observability">
-              <p>
-                Structured logging and query-observation hooks provide runtime
-                visibility without requiring application code to copy database
-                bindings or sensitive values into observer events.
-              </p>
-            </DocSection>
-
-            <DocSection id="errors" title="Error Handling">
-              <p>
-                Framework subsystems use explicit error types so applications can
-                distinguish validation, views, database, routing, and runtime failures
-                rather than treating every failure as an undifferentiated exception.
-              </p>
-            </DocSection>
-
-            <DocSection id="production" title="Production">
-              <p>
-                Production behavior should be configured through explicit runtime
-                limits, health contracts, shutdown behavior, and backend choices.
-                Capabilities that remain foundations are documented as such rather
-                than presented as complete production guarantees.
-              </p>
-            </DocSection>
-
-            <DocSection id="cli" title="CLI">
-              <p>
-                The CLI is project-aware and supports project creation, development,
-                building, and running applications.
-              </p>
-              <CodeBlock code={cliCode} label="Project commands" terminal />
-            </DocSection>
-
-            <DocSection id="code-generation" title="Code Generation">
-              <p>
-                Generators emit Gungnir source and refuse to silently overwrite
-                existing application files.
-              </p>
-              <CodeBlock code={generatorCode} label="Generators" terminal />
-            </DocSection>
-
-            <DocSection id="compiler" title="Compiler">
-              <p>
-                The source pipeline is lexer → parser and lexical-scope analysis →
-                Gungnir AST → lowering → generated C++ → Clang, GCC, or MSVC. Source
-                locations are preserved where supported so downstream diagnostics can
-                point back to the originating <code>.gnr</code> source.
+                Use application logging for operational events, errors, and useful
+                request context. Avoid logging secrets, authentication credentials,
+                or sensitive database values.
               </p>
             </DocSection>
 
             <DocSection id="testing" title="Testing">
               <p>
-                The framework includes testing helpers and end-to-end fixtures that
-                exercise Gungnir source through transpilation, native compilation,
-                linking, and runtime dispatch.
+                Keep application behavior testable by separating request handling,
+                data access, and services. Use the framework testing helpers for
+                routes and application behavior, and keep database-dependent tests
+                isolated from unit-level logic where practical.
               </p>
             </DocSection>
 
-            <DocSection id="extensions" title="Extensions">
+            <DocSection id="deployment" title="Deployment">
               <p>
-                Provider and extension APIs define framework integration boundaries.
-                Extension behavior should stay explicit and avoid bypassing normal
-                application lifecycle and dependency-container rules.
+                Build the application in release mode, provide production
+                environment configuration, run database migrations as part of the
+                deployment process, and configure the HTTP runtime limits
+                appropriate for the environment.
+              </p>
+              <CodeBlock
+                code={"gungnir build --release\ngungnir run --release"}
+                label="Production build"
+                terminal
+              />
+              <p>
+                Place TLS termination, process supervision, logging, and any
+                external database or cache services according to the deployment
+                environment used by your application.
               </p>
             </DocSection>
           </div>
