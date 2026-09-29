@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
@@ -5,11 +6,15 @@ export default function Home() {
     <main className="gungnir-shell min-h-screen text-pearl-white">
       <header className="border-b border-deep-steel/35 bg-graphite/35 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 sm:px-10 lg:px-16">
-          <Link
-            href="/"
-            className="gungnir-metal-text text-lg font-semibold tracking-[0.18em]"
-          >
-            GUNGNIR
+          <Link href="/" aria-label="Gungnir home" className="block">
+            <Image
+              src="/images/logo.png"
+              alt="Gungnir"
+              width={240}
+              height={96}
+              priority
+              className="h-9 w-auto object-contain sm:h-10"
+            />
           </Link>
           <nav className="flex items-center gap-6 text-sm text-soft-silver">
             <Link
