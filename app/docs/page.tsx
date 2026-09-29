@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -83,8 +84,15 @@ export default function Documentation() {
       <header className="sticky top-0 z-50 border-b border-deep-steel/40 bg-graphite/85 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-[1500px] items-center justify-between px-6 lg:px-8">
           <div className="flex items-center gap-8">
-            <Link href="/" className="gungnir-metal-text font-semibold tracking-[0.18em]">
-              GUNGNIR
+            <Link href="/" aria-label="Gungnir home" className="block">
+              <Image
+                src="/images/logo.png"
+                alt="Gungnir"
+                width={220}
+                height={88}
+                priority
+                className="h-8 w-auto object-contain"
+              />
             </Link>
             <span className="hidden text-sm text-soft-silver sm:inline">
               Documentation
