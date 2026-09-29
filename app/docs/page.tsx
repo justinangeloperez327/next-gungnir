@@ -50,7 +50,7 @@ const groups = [
 
 function Code({ children }: { children: string }) {
   return (
-    <pre className="overflow-x-auto rounded-lg border border-soft-silver/10 bg-graphite p-5 text-sm leading-7 text-soft-silver">
+    <pre className="gungnir-blue-glow overflow-x-auto rounded-lg border border-deep-steel/55 bg-graphite/90 p-5 text-sm leading-7 text-soft-silver">
       <code>{children}</code>
     </pre>
   );
@@ -66,7 +66,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-24 border-b border-soft-silver/10 py-12">
+    <section id={id} className="scroll-mt-24 border-b border-deep-steel/35 py-12">
       <h2 className="text-3xl font-semibold tracking-[-0.03em] text-pearl-white">
         {title}
       </h2>
@@ -79,11 +79,11 @@ function Section({
 
 export default function Documentation() {
   return (
-    <main className="min-h-screen bg-midnight-navy text-pearl-white">
-      <header className="sticky top-0 z-50 border-b border-soft-silver/10 bg-midnight-navy/95 backdrop-blur">
+    <main className="gungnir-docs-shell min-h-screen text-pearl-white">
+      <header className="sticky top-0 z-50 border-b border-deep-steel/40 bg-graphite/85 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-[1500px] items-center justify-between px-6 lg:px-8">
           <div className="flex items-center gap-8">
-            <Link href="/" className="font-semibold tracking-[0.18em]">
+            <Link href="/" className="gungnir-metal-text font-semibold tracking-[0.18em]">
               GUNGNIR
             </Link>
             <span className="hidden text-sm text-soft-silver sm:inline">
@@ -91,7 +91,7 @@ export default function Documentation() {
             </span>
           </div>
           <div className="flex items-center gap-5 text-sm text-soft-silver">
-            <span className="hidden rounded border border-soft-silver/15 px-2.5 py-1 text-xs sm:inline">
+            <span className="hidden rounded border border-deep-steel/60 bg-midnight-navy/50 px-2.5 py-1 text-xs text-soft-silver sm:inline">
               v0.1.0
             </span>
             <a
@@ -105,11 +105,11 @@ export default function Documentation() {
       </header>
 
       <div className="mx-auto grid max-w-[1500px] lg:grid-cols-[260px_minmax(0,1fr)]">
-        <aside className="hidden border-r border-soft-silver/10 px-6 py-10 lg:block">
+        <aside className="hidden border-r border-deep-steel/35 bg-graphite/20 px-6 py-10 lg:block">
           <nav className="sticky top-24 space-y-8">
             {groups.map((group) => (
               <div key={group.title}>
-                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-precision-blue">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-highlight">
                   {group.title}
                 </p>
                 <ul className="space-y-2">
@@ -131,8 +131,8 @@ export default function Documentation() {
 
         <article className="min-w-0 px-6 py-12 sm:px-10 lg:px-14 xl:px-20">
           <div className="max-w-4xl">
-            <div className="border-b border-soft-silver/10 pb-12">
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-precision-blue">
+            <div className="border-b border-deep-steel/35 pb-12">
+              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-cyan-highlight">
                 Gungnir Documentation
               </p>
               <h1 className="mt-4 text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">
@@ -144,7 +144,7 @@ export default function Documentation() {
                 application layers needed for server-side development while
                 compiling to ordinary, inspectable C++.
               </p>
-              <div className="mt-8 rounded-lg border border-precision-blue/25 bg-precision-blue/5 p-5 text-sm leading-6 text-soft-silver">
+              <div className="mt-8 rounded-lg border border-precision-blue/35 bg-precision-blue/10 p-5 text-sm leading-6 text-soft-silver">
                 Gungnir is under active development. Version 0.1.0 is not yet
                 considered API-stable, so applications should pin the exact
                 version or commit they validate against.
@@ -354,7 +354,7 @@ export default function Documentation() {
                 ].map((item) => (
                   <div
                     key={item}
-                    className="rounded-md border border-soft-silver/10 bg-graphite/45 px-4 py-3 text-sm"
+                    className="rounded-md border border-deep-steel/50 bg-graphite/55 px-4 py-3 text-sm"
                   >
                     {item}
                   </div>
