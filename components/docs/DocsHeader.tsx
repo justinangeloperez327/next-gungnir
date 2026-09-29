@@ -7,11 +7,7 @@ export function DocsHeader() {
     <header className="sticky top-0 z-40 border-b border-gungnir-silver bg-gungnir-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-[1540px] flex-wrap items-center gap-4 px-5 py-3 sm:px-8 lg:h-[68px] lg:flex-nowrap lg:py-0">
         <div className="flex shrink-0 items-center gap-5">
-          <Link
-            href="/"
-            aria-label="Gungnir home"
-            className="rounded-md bg-gungnir-silver px-2 py-1"
-          >
+          <Link href="/" aria-label="Gungnir home">
             <Image
               src="/images/logo.png"
               alt="Gungnir"
