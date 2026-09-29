@@ -33,6 +33,12 @@ Logo:
 public/images/logo-alt.png
 ```
 
+Theme:
+
+- Dark mode is the default.
+- Use the theme toggle in the site header to switch to light mode.
+- The selected theme is saved in the browser.
+
 Primary colors:
 
 - Blue: `#0A7BEF`

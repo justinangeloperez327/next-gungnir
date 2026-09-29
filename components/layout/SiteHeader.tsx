@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-gungnir-silver/70 bg-gungnir-white/95 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-line/70 bg-surface/95 backdrop-blur">
       <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
         <Link href="/" aria-label="Gungnir home" className="flex items-center">
           <Image
@@ -16,7 +17,7 @@ export function SiteHeader() {
           />
         </Link>
 
-        <nav aria-label="Primary navigation" className="flex items-center gap-5 text-sm font-medium text-ink sm:gap-7">
+        <nav aria-label="Primary navigation" className="flex items-center gap-5 text-sm font-medium text-foreground sm:gap-7">
           <Link className="transition-colors hover:text-gungnir-blue" href="/docs">
             Documentation
           </Link>
@@ -26,6 +27,7 @@ export function SiteHeader() {
           >
             GitHub
           </a>
+          <ThemeToggle />
         </nav>
       </div>
     </header>

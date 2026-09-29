@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { DocsSearch } from "./DocsSearch";
 
 export function DocsHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-gungnir-silver bg-gungnir-white/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-line bg-surface/95 backdrop-blur">
       <div className="mx-auto flex max-w-[1540px] flex-wrap items-center gap-4 px-5 py-3 sm:px-8 lg:h-[68px] lg:flex-nowrap lg:py-0">
         <div className="flex shrink-0 items-center gap-5">
           <Link href="/" aria-label="Gungnir home">
@@ -17,7 +18,7 @@ export function DocsHeader() {
               className="h-8 w-auto object-contain"
             />
           </Link>
-          <span className="hidden border-l border-gungnir-silver pl-5 text-sm font-medium text-ink/65 sm:inline">
+          <span className="hidden border-l border-line pl-5 text-sm font-medium text-foreground/65 sm:inline">
             Documentation
           </span>
         </div>
@@ -26,12 +27,15 @@ export function DocsHeader() {
           <DocsSearch />
         </div>
 
-        <a
-          href="https://github.com/justinangeloperez327/gungnir"
-          className="ml-auto shrink-0 text-sm font-medium text-ink transition-colors hover:text-gungnir-blue"
-        >
-          GitHub
-        </a>
+        <div className="ml-auto flex shrink-0 items-center gap-3">
+          <a
+            href="https://github.com/justinangeloperez327/gungnir"
+            className="text-sm font-medium text-foreground transition-colors hover:text-gungnir-blue"
+          >
+            GitHub
+          </a>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );

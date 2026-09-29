@@ -4,19 +4,44 @@
   --gungnir-blue: #0A7BEF;
   --gungnir-white: #F8FAFC;
   --gungnir-silver: #C7D0DA;
-  --ink: #0B0D10;
+  --gungnir-black: #0B0D10;
 
-  --background: var(--gungnir-white);
-  --foreground: var(--ink);
+  --surface: var(--gungnir-black);
+  --surface-elevated: color-mix(in srgb, var(--gungnir-black) 92%, var(--gungnir-silver));
+  --surface-muted: color-mix(in srgb, var(--gungnir-black) 84%, var(--gungnir-silver));
+  --foreground: var(--gungnir-white);
+  --line: color-mix(in srgb, var(--gungnir-silver) 32%, var(--gungnir-black));
+}
+
+html[data-theme="light"] {
+  --surface: var(--gungnir-white);
+  --surface-elevated: #FFFFFF;
+  --surface-muted: color-mix(in srgb, var(--gungnir-silver) 18%, var(--gungnir-white));
+  --foreground: var(--gungnir-black);
+  --line: var(--gungnir-silver);
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  --surface: var(--gungnir-black);
+  --surface-elevated: color-mix(in srgb, var(--gungnir-black) 92%, var(--gungnir-silver));
+  --surface-muted: color-mix(in srgb, var(--gungnir-black) 84%, var(--gungnir-silver));
+  --foreground: var(--gungnir-white);
+  --line: color-mix(in srgb, var(--gungnir-silver) 32%, var(--gungnir-black));
+  color-scheme: dark;
 }
 
 @theme inline {
   --color-gungnir-blue: var(--gungnir-blue);
   --color-gungnir-white: var(--gungnir-white);
   --color-gungnir-silver: var(--gungnir-silver);
-  --color-ink: var(--ink);
-  --color-background: var(--background);
+  --color-ink: var(--gungnir-black);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-muted: var(--surface-muted);
   --color-foreground: var(--foreground);
+  --color-line: var(--line);
+  --color-background: var(--surface);
 }
 
 * {
@@ -25,14 +50,14 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--gungnir-white);
+  background: var(--surface);
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--gungnir-white);
-  color: var(--ink);
+  background: var(--surface);
+  color: var(--foreground);
   font-family:
     Inter,
     Geist,
@@ -42,6 +67,9 @@ body {
     "Segoe UI",
     sans-serif;
   text-rendering: optimizeLegibility;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
 }
 
 a {
@@ -76,9 +104,9 @@ pre {
 }
 
 .surface-soft {
-  background: rgb(199 208 218 / 0.18);
+  background: var(--surface-muted);
 }
 
 .surface-softer {
-  background: rgb(199 208 218 / 0.10);
+  background: color-mix(in srgb, var(--surface-muted) 65%, var(--surface));
 }

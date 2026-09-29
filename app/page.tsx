@@ -62,19 +62,19 @@ const features = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gungnir-white text-ink">
+    <main className="min-h-screen bg-surface text-foreground">
       <SiteHeader />
 
-      <section className="border-b border-gungnir-silver">
+      <section className="border-b border-line">
         <div className="mx-auto grid max-w-7xl gap-14 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:px-12 lg:py-32">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gungnir-blue">
               Gungnir Framework
             </p>
-            <h1 className="mt-5 max-w-4xl text-5xl font-semibold tracking-[-0.045em] text-ink sm:text-6xl lg:text-7xl">
+            <h1 className="mt-5 max-w-4xl text-5xl font-semibold tracking-[-0.045em] text-foreground sm:text-6xl lg:text-7xl">
               An expressive web framework built in C++.
             </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-ink/68 sm:text-xl">
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-foreground/68 sm:text-xl">
               Gungnir gives C++ developers a structured way to build web
               applications with routing, controllers, models, validation,
               middleware, views, authentication, background jobs, and other
@@ -90,7 +90,7 @@ export default function Home() {
               </Link>
               <a
                 href="https://github.com/justinangeloperez327/gungnir"
-                className="rounded-md border border-gungnir-silver bg-gungnir-white px-5 py-3 text-sm font-semibold text-ink transition hover:border-gungnir-blue hover:text-gungnir-blue"
+                className="rounded-md border border-line bg-surface px-5 py-3 text-sm font-semibold text-foreground transition hover:border-gungnir-blue hover:text-gungnir-blue"
               >
                 View on GitHub →
               </a>
@@ -103,7 +103,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-b border-gungnir-silver">
+      <section className="border-b border-line">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-12 lg:py-24">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gungnir-blue">
@@ -112,32 +112,32 @@ export default function Home() {
             <h2 className="mt-3 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
               Everything needed for a modern web application.
             </h2>
-            <p className="mt-4 text-base leading-7 text-ink/65">
+            <p className="mt-4 text-base leading-7 text-foreground/65">
               Use familiar framework conventions to keep application code
               organized from the first route through database access,
               background work, and production services.
             </p>
           </div>
 
-          <div className="mt-12 grid border-l border-t border-gungnir-silver sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid border-l border-t border-line sm:grid-cols-2 lg:grid-cols-4">
             {features.map(([title, description]) => (
               <article
                 key={title}
-                className="border-b border-r border-gungnir-silver p-6"
+                className="border-b border-r border-line p-6"
               >
                 <span
                   aria-hidden="true"
                   className="mb-5 block h-2 w-2 rounded-full bg-gungnir-blue"
                 />
-                <h3 className="font-semibold text-ink">{title}</h3>
-                <p className="mt-2 text-sm leading-6 text-ink/60">{description}</p>
+                <h3 className="font-semibold text-foreground">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-foreground/60">{description}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-b border-gungnir-silver">
+      <section className="border-b border-line">
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:px-12 lg:py-24">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gungnir-blue">
@@ -146,7 +146,7 @@ export default function Home() {
             <h2 className="mt-3 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
               Write application code around the problem you are solving.
             </h2>
-            <p className="mt-5 text-base leading-7 text-ink/65">
+            <p className="mt-5 text-base leading-7 text-foreground/65">
               Models, controllers, middleware, migrations, requests, jobs, and
               other application classes follow predictable conventions so the
               project stays easy to navigate as it grows.
@@ -156,7 +156,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="surface-soft border-b border-gungnir-silver">
+      <section className="surface-soft border-b border-line">
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:px-12 lg:py-24">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gungnir-blue">
@@ -165,7 +165,7 @@ export default function Home() {
             <h2 className="mt-3 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
               Use async and await where your application needs them.
             </h2>
-            <p className="mt-5 text-base leading-7 text-ink/65">
+            <p className="mt-5 text-base leading-7 text-foreground/65">
               Controller actions can be asynchronous, keeping network-bound and
               other asynchronous work straightforward in application code.
             </p>
@@ -183,7 +183,7 @@ export default function Home() {
             <h2 className="mt-3 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
               Start building with Gungnir.
             </h2>
-            <p className="mt-5 text-base leading-7 text-ink/65">
+            <p className="mt-5 text-base leading-7 text-foreground/65">
               Learn how to install Gungnir, structure an application, define
               routes and controllers, work with models and migrations, validate
               requests, render views, and configure application services.

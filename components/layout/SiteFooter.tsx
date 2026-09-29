@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-gungnir-silver bg-gungnir-white">
+    <footer className="border-t border-line bg-surface">
       <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-10 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
         <Link href="/" aria-label="Gungnir home" className="w-fit">
           <Image
@@ -15,7 +15,7 @@ export function SiteFooter() {
           />
         </Link>
 
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-ink/70">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-foreground/70">
           <Link className="transition-colors hover:text-gungnir-blue" href="/docs">
             Documentation
           </Link>

@@ -167,11 +167,11 @@ function DocSection({
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-32 border-b border-gungnir-silver py-12">
-      <h2 className="text-3xl font-semibold tracking-[-0.03em] text-ink">
+    <section id={id} className="scroll-mt-32 border-b border-line py-12">
+      <h2 className="text-3xl font-semibold tracking-[-0.03em] text-foreground">
         {title}
       </h2>
-      <div className="mt-5 space-y-5 text-[15px] leading-7 text-ink/68">
+      <div className="mt-5 space-y-5 text-[15px] leading-7 text-foreground/68">
         {children}
       </div>
     </section>
@@ -196,16 +196,16 @@ function Topic({
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-32 rounded-lg border border-gungnir-silver p-5">
-      <h3 className="font-semibold text-ink">{title}</h3>
-      <div className="mt-2 text-sm leading-6 text-ink/62">{children}</div>
+    <section id={id} className="scroll-mt-32 rounded-lg border border-line p-5">
+      <h3 className="font-semibold text-foreground">{title}</h3>
+      <div className="mt-2 text-sm leading-6 text-foreground/62">{children}</div>
     </section>
   );
 }
 
 export default function Documentation() {
   return (
-    <main className="min-h-screen bg-gungnir-white text-ink">
+    <main className="min-h-screen bg-surface text-foreground">
       <DocsHeader />
 
       <div className="mx-auto grid max-w-[1540px] lg:grid-cols-[280px_minmax(0,1fr)]">
@@ -215,14 +215,14 @@ export default function Documentation() {
           <div className="mx-auto max-w-4xl">
             <MobileDocsNavigation />
 
-            <header className="border-b border-gungnir-silver py-10 lg:pt-2">
+            <header className="border-b border-line py-10 lg:pt-2">
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gungnir-blue">
                 Gungnir Documentation
               </p>
-              <h1 className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-ink sm:text-5xl">
+              <h1 className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-foreground sm:text-5xl">
                 Build web applications with clear conventions.
               </h1>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-ink/65">
+              <p className="mt-6 max-w-3xl text-lg leading-8 text-foreground/65">
                 This documentation focuses on the conventions and APIs you use to
                 build a Gungnir application: routes, controllers, models,
                 validation, views, database access, security, background work, and
