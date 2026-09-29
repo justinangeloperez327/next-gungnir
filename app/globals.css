@@ -1,8 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #07111f;
-  --foreground: #f7f9fc;
+  --midnight-navy: #071B33;
+  --royal-blue: #145DA0;
+  --precision-blue: #2389DA;
+  --soft-silver: #BCC5CE;
+  --pearl-white: #F8FAFC;
+  --graphite: #050D18;
+
+  --background: var(--graphite);
+  --foreground: var(--pearl-white);
+}
+
+@theme inline {
+  --color-midnight-navy: var(--midnight-navy);
+  --color-royal-blue: var(--royal-blue);
+  --color-precision-blue: var(--precision-blue);
+  --color-soft-silver: var(--soft-silver);
+  --color-pearl-white: var(--pearl-white);
+  --color-graphite: var(--graphite);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
 }
 
 * {
@@ -24,4 +42,9 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+::selection {
+  background: var(--precision-blue);
+  color: var(--pearl-white);
 }
