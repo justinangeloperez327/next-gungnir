@@ -9,7 +9,7 @@ export function DocsHeader() {
         <div className="flex shrink-0 items-center gap-5">
           <Link href="/" aria-label="Gungnir home">
             <Image
-              src="/images/logo.png"
+              src="/images/logo-alt.png"
               alt="Gungnir"
               width={220}
               height={88}

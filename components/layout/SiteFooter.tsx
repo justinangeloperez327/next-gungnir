@@ -7,7 +7,7 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-10 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
         <Link href="/" aria-label="Gungnir home" className="w-fit">
           <Image
-            src="/images/logo.png"
+            src="/images/logo-alt.png"
             alt="Gungnir"
             width={240}
             height={96}

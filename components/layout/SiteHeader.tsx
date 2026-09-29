@@ -7,7 +7,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
         <Link href="/" aria-label="Gungnir home" className="flex items-center">
           <Image
-            src="/images/logo.png"
+            src="/images/logo-alt.png"
             alt="Gungnir"
             width={240}
             height={96}

@@ -30,7 +30,7 @@ The site includes:
 Logo:
 
 ```text
-public/images/logo.png
+public/images/logo-alt.png
 ```
 
 Primary colors:
@@ -101,7 +101,7 @@ components/
 
 public/
 └── images/
-    └── logo.png
+    └── logo-alt.png
 ```
 
 ## Related Repository
