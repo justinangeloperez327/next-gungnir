@@ -84,7 +84,7 @@ export default function Home() {
             <div className="mt-9 flex flex-wrap gap-3">
               <Link
                 href="/docs"
-                className="rounded-md bg-gungnir-blue px-5 py-3 text-sm font-semibold text-gungnir-white transition hover:brightness-95"
+                className="rounded-md bg-button-primary px-5 py-3 text-sm font-semibold text-button-primary-text transition-colors hover:bg-button-primary-hover"
               >
                 Get Started
               </Link>
@@ -190,7 +190,7 @@ export default function Home() {
             </p>
             <Link
               href="/docs"
-              className="mt-8 inline-flex rounded-md bg-gungnir-blue px-5 py-3 text-sm font-semibold text-gungnir-white transition hover:brightness-95"
+              className="mt-8 inline-flex rounded-md bg-button-primary px-5 py-3 text-sm font-semibold text-button-primary-text transition-colors hover:bg-button-primary-hover"
             >
               Read the documentation
             </Link>

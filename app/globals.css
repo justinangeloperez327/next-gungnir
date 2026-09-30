@@ -6,6 +6,10 @@
   --gungnir-silver: #C7D0DA;
   --gungnir-black: #0B0D10;
 
+  --button-primary: #8CCBFF;
+  --button-primary-hover: #78C2FF;
+  --button-primary-text: var(--gungnir-black);
+
   --surface: var(--gungnir-black);
   --surface-elevated: color-mix(in srgb, var(--gungnir-black) 92%, var(--gungnir-silver));
   --surface-muted: color-mix(in srgb, var(--gungnir-black) 84%, var(--gungnir-silver));
@@ -36,6 +40,9 @@ html[data-theme="dark"] {
   --color-gungnir-white: var(--gungnir-white);
   --color-gungnir-silver: var(--gungnir-silver);
   --color-ink: var(--gungnir-black);
+  --color-button-primary: var(--button-primary);
+  --color-button-primary-hover: var(--button-primary-hover);
+  --color-button-primary-text: var(--button-primary-text);
   --color-surface: var(--surface);
   --color-surface-elevated: var(--surface-elevated);
   --color-surface-muted: var(--surface-muted);
