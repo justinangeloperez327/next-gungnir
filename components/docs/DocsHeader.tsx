@@ -5,10 +5,10 @@ import { DocsSearch } from "./DocsSearch";
 
 export function DocsHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-surface/95 backdrop-blur">
-      <div className="mx-auto flex max-w-[1540px] flex-wrap items-center gap-4 px-5 py-3 sm:px-8 lg:h-[68px] lg:flex-nowrap lg:py-0">
-        <div className="flex shrink-0 items-center gap-5">
-          <Link href="/" aria-label="Gungnir home">
+    <header className="sticky top-0 z-50 border-b border-line/80 bg-surface/95 backdrop-blur-md">
+      <div className="mx-auto flex max-w-[1600px] flex-wrap items-center gap-3 px-5 py-2 sm:px-8 lg:h-16 lg:flex-nowrap lg:px-10 lg:py-0">
+        <div className="flex shrink-0 items-center gap-4">
+          <Link href="/" aria-label="Gungnir home" className="flex min-h-11 items-center">
             <Image
               src="/images/logo-alt.png"
               alt="Gungnir"
@@ -18,7 +18,7 @@ export function DocsHeader() {
               className="h-8 w-auto object-contain"
             />
           </Link>
-          <span className="hidden border-l border-line pl-5 text-sm font-medium text-foreground/65 sm:inline">
+          <span className="hidden border-l border-line pl-4 text-sm font-medium text-muted sm:inline">
             Documentation
           </span>
         </div>
@@ -27,10 +27,10 @@ export function DocsHeader() {
           <DocsSearch />
         </div>
 
-        <div className="ml-auto flex shrink-0 items-center gap-3">
+        <div className="ml-auto flex shrink-0 items-center gap-2">
           <a
             href="https://github.com/justinangeloperez327/gungnir"
-            className="text-sm font-medium text-foreground transition-colors hover:text-gungnir-blue"
+            className="hidden min-h-10 items-center rounded px-2 text-sm font-medium text-foreground transition-colors hover:text-gungnir-blue sm:inline-flex"
           >
             GitHub
           </a>

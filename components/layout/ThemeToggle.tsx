@@ -29,7 +29,7 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       aria-label={`Switch to ${switchingTo} mode`}
       title={`Switch to ${switchingTo} mode`}
-      className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-line bg-surface-elevated text-foreground transition-colors hover:border-gungnir-blue hover:text-gungnir-blue"
+      className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-line bg-surface-elevated text-foreground transition-colors hover:border-gungnir-blue hover:text-gungnir-blue"
     >
       {theme === "dark" ? (
         <svg

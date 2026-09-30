@@ -46,6 +46,17 @@ Primary colors:
 - Silver: `#C7D0DA`
 - Black text: `#0B0D10`
 
+## UI / UX
+
+- Dark mode is the default, with a persistent light-mode preference.
+- Documentation is split into focused topic routes.
+- Desktop documentation uses a persistent sidebar, readable article width, breadcrumbs, page table of contents, and previous/next navigation.
+- Mobile documentation uses a dedicated navigation drawer.
+- Documentation search supports `Ctrl/Cmd + K`.
+- Code examples support copy-to-clipboard and restrained syntax highlighting.
+- Primary filled actions use `#8CCBFF` with black text for strong contrast; `#0A7BEF` remains the interaction/accent color.
+- Motion is restrained and respects `prefers-reduced-motion`.
+
 ## Development
 
 Requirements:
